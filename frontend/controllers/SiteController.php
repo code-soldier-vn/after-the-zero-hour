@@ -1,6 +1,8 @@
 <?php
+
 namespace frontend\controllers;
 
+use backend\models\Contact;
 use Yii;
 use yii\base\InvalidParamException;
 use yii\web\BadRequestHttpException;
@@ -119,6 +121,21 @@ class SiteController extends Controller
     {
         $model = new ContactForm();
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            $contact = new Contact();
+
+            $post = Yii::$app->request->post();
+
+            if (isset($post['ContactForm'])) {
+                $contact->name = $post['ContactForm']['name'];
+                $contact->email = $post['ContactForm']['email'];
+                $contact->subject = $post['ContactForm']['subject'];
+                $contact->body = $post['ContactForm']['body'];
+
+                if ($contact->validate()) {
+                    $contact->save();
+                }
+            }
+
             if ($model->sendEmail(Yii::$app->params['adminEmail'])) {
                 Yii::$app->session->setFlash('success', 'Thank you for contacting us. We will respond to you as soon as possible.');
             } else {
@@ -127,9 +144,7 @@ class SiteController extends Controller
 
             return $this->refresh();
         } else {
-            return $this->render('contact', [
-                'model' => $model,
-            ]);
+            return $this->render('contact', ['model' => $model,]);
         }
     }
 
@@ -147,6 +162,7 @@ class SiteController extends Controller
      * Signs user up.
      *
      * @return mixed
+     * @throws \Exception
      */
     public function actionSignup()
     {

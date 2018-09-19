@@ -3,9 +3,9 @@
 use yii\db\Migration;
 
 /**
- * Class m180918_104642_init_category
+ * Class m180919_032150_init_table_contact
  */
-class m180918_104642_init_category extends Migration
+class m180919_032150_init_table_contact extends Migration
 {
     /**
      * {@inheritdoc}
@@ -17,12 +17,12 @@ class m180918_104642_init_category extends Migration
             $options = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB';
         }
 
-        $this->createTable("{{%category}}", [
+        $this->createTable("{{%contact}}", [
             'id' => $this->primaryKey(),
-            'slug' => $this->string()->notNull()->unique(),
-            'name' => $this->string()->notNull(),
-            'parent' => $this->smallInteger()->notNull()->defaultValue(0),
-            'status' => $this->smallInteger()->notNull()->defaultValue(0),
+            'name' => $this->string(255)->notNull(),
+            'email' => $this->string(255)->notNull(),
+            'subject' => $this->string(255)->notNull(),
+            'body' => $this->text()->notNull(),
             'created_at' => $this->integer(),
             'updated_at' => $this->integer()
         ], $options);
@@ -33,7 +33,6 @@ class m180918_104642_init_category extends Migration
      */
     public function safeDown()
     {
-        $this->dropTable("{{%category}}");
-        return false;
+        $this->dropTable('contact');
     }
 }

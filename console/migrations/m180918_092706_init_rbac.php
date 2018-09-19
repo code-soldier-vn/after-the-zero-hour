@@ -42,11 +42,8 @@ class m180918_092706_init_rbac extends Migration
      */
     public function safeDown()
     {
-        echo "m180918_092706_init_rbac cannot be reverted.\n";
-
         $auth = Yii::$app->authManager;
         $auth->removeAll();
-
         return false;
     }
 
