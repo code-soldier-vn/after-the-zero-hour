@@ -21,6 +21,7 @@ class m180918_104642_init_category extends Migration
             'id' => $this->primaryKey(),
             'slug' => $this->string()->notNull()->unique(),
             'name' => $this->string()->notNull(),
+            'parent' => $this->smallInteger()->notNull()->defaultValue(0),
             'status' => $this->smallInteger()->notNull()->defaultValue(0),
             'created_at' => $this->integer()->notNull(),
             'updated_at' => $this->integer()->notNull()
@@ -32,23 +33,6 @@ class m180918_104642_init_category extends Migration
      */
     public function safeDown()
     {
-        echo "m180918_104642_init_category cannot be reverted.\n";
         $this->dropTable("{{%category}}");
-        return false;
     }
-
-    /*
-    // Use up()/down() to run migration code without a transaction.
-    public function up()
-    {
-
-    }
-
-    public function down()
-    {
-        echo "m180918_104642_init_category cannot be reverted.\n";
-
-        return false;
-    }
-    */
 }
