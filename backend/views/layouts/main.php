@@ -121,6 +121,12 @@ AppAsset::register($this);
 
                 <div class="row">
                     <div class="col-xs-12">
+                        <?= Alert::widget() ?>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-12">
                         <?= $content ?>
                     </div>
                 </div>
