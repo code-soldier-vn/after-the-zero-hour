@@ -1,16 +1,16 @@
 <?php
-
 /* @var $this \yii\web\View */
 
 /* @var $content string */
 
 use backend\assets\AppAsset;
 use yii\helpers\Html;
+use yii\widgets\Breadcrumbs;
 use common\widgets\Alert;
 
 AppAsset::register($this);
 ?>
-<?php $this->beginPage() ?>
+
 <!DOCTYPE html>
 <html lang="<?= Yii::$app->language ?>">
 <head>
@@ -23,21 +23,20 @@ AppAsset::register($this);
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet' type='text/css'>
 </head>
-<body id="login_page">
+<body>
 <?php $this->beginBody() ?>
 
 <div class="wrapper">
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-6 col-xs-push-3">
-                <?= Alert::widget() ?>
-                <?= $content ?>
-            </div>
-        </div>
-    </div>
-</div>
+    <?= $this->render('@app/views/layouts/_sidebar') ?>
 
-<?php $this->endBody() ?>
-</body>
-</html>
-<?php $this->endPage() ?>
+    <div class="main-panel">
+        <?= $this->render('@app/views/layouts/_nav') ?>
+
+        <div class="content">
+            <div class="container-fluid">
+
+                <?= Breadcrumbs::widget([
+                    'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+                ]); ?>
+
+                <?= Alert::widget() ?>

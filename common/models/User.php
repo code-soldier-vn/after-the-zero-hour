@@ -1,4 +1,5 @@
 <?php
+
 namespace common\models;
 
 use Yii;
@@ -83,6 +84,19 @@ class User extends ActiveRecord implements IdentityInterface
         return static::findOne(['username' => $username, 'status' => self::STATUS_ACTIVE]);
     }
 
+    public static function findAdminByUsername($username)
+    {
+        return static::find()
+            ->select('user.*')
+            ->innerJoin('auth_assignment', '`user`.`id` = `auth_assignment`.`user_id`')
+            ->where([
+                'username' => $username,
+                'status' => self::STATUS_ACTIVE,
+                'auth_assignment.item_name' => 'admin'
+            ])
+            ->one();
+    }
+
     /**
      * Finds user by password reset token
      *
@@ -113,7 +127,7 @@ class User extends ActiveRecord implements IdentityInterface
             return false;
         }
 
-        $timestamp = (int) substr($token, strrpos($token, '_') + 1);
+        $timestamp = (int)substr($token, strrpos($token, '_') + 1);
         $expire = Yii::$app->params['user.passwordResetTokenExpire'];
         return $timestamp + $expire >= time();
     }

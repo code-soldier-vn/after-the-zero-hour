@@ -283,7 +283,7 @@ hr {
     overflow: hidden;
     width: 260px;
     z-index: 4;
-    box-shadow: inset -1px 0px 0px 0px #DDDDDD;
+    box-shadow: inset -1px 0 0 0 #DDDDDD;
 }
 
 .sidebar .sidebar-background {
@@ -307,7 +307,7 @@ hr {
 
 .sidebar .logo,
 .off-canvas-sidebar .logo {
-    padding: 18px 0px;
+    padding: 18px 0;
     margin: 0 20px;
 }
 
@@ -322,7 +322,7 @@ hr {
 .sidebar .logo .simple-text,
 .off-canvas-sidebar .logo .simple-text {
     text-transform: uppercase;
-    padding: 4px 0px;
+    padding: 4px 0;
     display: block;
     font-size: 18px;
     text-align: center;
@@ -337,7 +337,7 @@ hr {
 
 .sidebar .nav li > a,
 .off-canvas-sidebar .nav li > a {
-    margin: 10px 0px;
+    margin: 10px 0;
     padding-left: 25px;
     padding-right: 25px;
     opacity: .7;
@@ -1461,7 +1461,7 @@ textarea.form-control {
 .checkbox input,
 .radio input {
     outline: none !important;
-    display: none;
+    display: inline-block;
 }
 
 .checkbox label,
@@ -1576,14 +1576,14 @@ textarea.form-control {
 
 .navbar .navbar-brand {
     font-weight: 600;
-    margin: 5px 0px;
+    margin: 5px 0;
     padding: 20px 15px;
     font-size: 20px;
 }
 
 .navbar .navbar-nav > li > a {
     line-height: 1.42857;
-    margin: 15px 0px;
+    margin: 15px 0;
     padding: 10px 15px;
 }
 
@@ -1874,7 +1874,7 @@ textarea.form-control {
     border-radius: 6px;
     display: block;
     margin-top: 10px;
-    padding: 0px;
+    padding: 0;
     position: absolute;
     visibility: hidden;
     z-index: 9000;
@@ -1892,7 +1892,7 @@ textarea.form-control {
 
 .dropdown-menu .divider {
     background-color: #F1EAE0;
-    margin: 0px;
+    margin: 0;
 }
 
 .dropdown-menu .dropdown-header {
@@ -2049,7 +2049,7 @@ textarea.form-control {
     font-size: 14px;
     font-weight: 400;
     color: #9A9A9A;
-    margin-bottom: 0px;
+    margin-bottom: 0;
 }
 
 .card .category i,
@@ -2164,7 +2164,7 @@ textarea.form-control {
 }
 
 .card ul.team-members li {
-    padding: 10px 0px;
+    padding: 10px 0;
 }
 
 .card ul.team-members li:not(:last-child) {
@@ -3056,12 +3056,12 @@ textarea.form-control {
 
     .navbar-nav > li > .dropdown-menu,
     .dropdown .dropdown-menu {
-        transform: translate3d(0px, -40px, 0px);
+        transform: translate3d(0px, -40px, 0);
         transition: all 0.3s cubic-bezier(0.215, 0.61, 0.355, 1) 0s, opacity 0.3s ease 0s, height 0s linear 0.35s;
     }
 
     .navbar-nav > li.open > .dropdown-menu, .dropdown.open .dropdown-menu {
-        transform: translate3d(0px, 0px, 0px);
+        transform: translate3d(0px, 0, 0);
     }
 
     .navbar-nav > li > .dropdown-menu:before {
@@ -3195,7 +3195,7 @@ textarea.form-control {
         overflow-y: visible;
         border-top: none;
         text-align: left;
-        padding-right: 0px;
+        padding-right: 0;
         padding-left: 0;
         -webkit-transform: translate3d(230px, 0, 0);
         -moz-transform: translate3d(230px, 0, 0);
@@ -3214,7 +3214,7 @@ textarea.form-control {
         z-index: 3;
         overflow-y: scroll;
         height: 100%;
-        box-shadow: inset 1px 0px 0px 0px #DDDDDD;
+        box-shadow: inset 1px 0 0 0 #DDDDDD;
     }
 
     .off-canvas-sidebar .nav {
@@ -3223,7 +3223,7 @@ textarea.form-control {
     }
 
     .off-canvas-sidebar .nav > li > a {
-        margin: 0px 0px;
+        margin: 0 0;
         color: #66615B;
         text-transform: uppercase;
         font-weight: 600;
@@ -3261,7 +3261,7 @@ textarea.form-control {
         border-bottom: 12px solid transparent;
         right: auto;
         margin-left: -15px;
-        left: 0px;
+        left: 0;
         top: 10px;
     }
 
@@ -3357,7 +3357,7 @@ textarea.form-control {
     }
 
     .bar1 {
-        top: 0px;
+        top: 0;
         -webkit-animation: topbar-back 500ms linear 0s;
         -moz-animation: topbar-back 500ms linear 0s;
         animation: topbar-back 500ms 0s;
@@ -3371,7 +3371,7 @@ textarea.form-control {
     }
 
     .bar3 {
-        bottom: 0px;
+        bottom: 0;
         -webkit-animation: bottombar-back 500ms linear 0s;
         -moz-animation: bottombar-back 500ms linear 0s;
         animation: bottombar-back 500ms 0s;
@@ -3406,7 +3406,7 @@ textarea.form-control {
 
     @keyframes topbar-x {
         0% {
-            top: 0px;
+            top: 0;
             transform: rotate(0deg);
         }
         45% {
@@ -3422,7 +3422,7 @@ textarea.form-control {
     }
     @-webkit-keyframes topbar-x {
         0% {
-            top: 0px;
+            top: 0;
             -webkit-transform: rotate(0deg);
         }
         45% {
@@ -3438,7 +3438,7 @@ textarea.form-control {
     }
     @-moz-keyframes topbar-x {
         0% {
-            top: 0px;
+            top: 0;
             -moz-transform: rotate(0deg);
         }
         45% {
@@ -3464,7 +3464,7 @@ textarea.form-control {
             transform: rotate(5deg);
         }
         100% {
-            top: 0px;
+            top: 0;
             transform: rotate(0);
         }
     }
@@ -3480,7 +3480,7 @@ textarea.form-control {
             -webkit-transform: rotate(5deg);
         }
         100% {
-            top: 0px;
+            top: 0;
             -webkit-transform: rotate(0);
         }
     }
@@ -3496,13 +3496,13 @@ textarea.form-control {
             -moz-transform: rotate(5deg);
         }
         100% {
-            top: 0px;
+            top: 0;
             -moz-transform: rotate(0);
         }
     }
     @keyframes bottombar-x {
         0% {
-            bottom: 0px;
+            bottom: 0;
             transform: rotate(0deg);
         }
         45% {
@@ -3518,7 +3518,7 @@ textarea.form-control {
     }
     @-webkit-keyframes bottombar-x {
         0% {
-            bottom: 0px;
+            bottom: 0;
             -webkit-transform: rotate(0deg);
         }
         45% {
@@ -3534,7 +3534,7 @@ textarea.form-control {
     }
     @-moz-keyframes bottombar-x {
         0% {
-            bottom: 0px;
+            bottom: 0;
             -moz-transform: rotate(0deg);
         }
         45% {
@@ -3560,7 +3560,7 @@ textarea.form-control {
             transform: rotate(-5deg);
         }
         100% {
-            bottom: 0px;
+            bottom: 0;
             transform: rotate(0);
         }
     }
@@ -3576,7 +3576,7 @@ textarea.form-control {
             -webkit-transform: rotate(-5deg);
         }
         100% {
-            bottom: 0px;
+            bottom: 0;
             -webkit-transform: rotate(0);
         }
     }
@@ -3592,7 +3592,7 @@ textarea.form-control {
             -moz-transform: rotate(-5deg);
         }
         100% {
-            bottom: 0px;
+            bottom: 0;
             -moz-transform: rotate(0);
         }
     }
@@ -3713,7 +3713,7 @@ textarea.form-control {
     }
 
     .footer .copyright {
-        padding: 0px 15px;
+        padding: 0 15px;
         width: 100%;
     }
 }
@@ -3742,10 +3742,15 @@ textarea.form-control {
 }
 
 body#login_page {
-    padding-top: 120px !important;
+    padding-top: 80px !important;
     background: #ccc !important;
 }
 
 #box_login {
     padding: 50px;
+}
+
+body#login_page .wrapper{
+    height: auto !important;
+    min-height: auto !important;
 }

@@ -3,18 +3,31 @@
 namespace backend\controllers;
 
 use Yii;
-use \backend\models\Contact;
-use \backend\models\ContactSearch;
-use \yii\filters\AccessControl;
+use \backend\models\Category;
+use \backend\models\CategorySearch;
+use yii\filters\AccessControl;
 use \yii\web\Controller;
 use \yii\web\NotFoundHttpException;
 use \yii\filters\VerbFilter;
+use \yii\base\Module;
 
 /**
- * ContactController implements the CRUD actions for Contact model.
+ * CategoryController implements the CRUD actions for Category model.
  */
-class ContactController extends Controller
+class CategoryController extends Controller
 {
+    /**
+     * CategoryController constructor.
+     * @param $id
+     * @param \yii\base\Module $module
+     * @param array $config
+     */
+    public function __construct($id, Module $module, array $config = [])
+    {
+        parent::__construct($id, $module, $config);
+        $this->layout = 'crud';
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -37,17 +50,17 @@ class ContactController extends Controller
                 'actions' => [
                     'delete' => ['POST'],
                 ],
-            ]
+            ],
         ];
     }
 
     /**
-     * Lists all Contact models.
+     * Lists all Category models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new ContactSearch();
+        $searchModel = new CategorySearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -57,7 +70,7 @@ class ContactController extends Controller
     }
 
     /**
-     * Displays a single Contact model.
+     * Displays a single Category model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -70,13 +83,13 @@ class ContactController extends Controller
     }
 
     /**
-     * Creates a new Contact model.
+     * Creates a new Category model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Contact();
+        $model = new Category();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -88,7 +101,7 @@ class ContactController extends Controller
     }
 
     /**
-     * Updates an existing Contact model.
+     * Updates an existing Category model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -97,6 +110,7 @@ class ContactController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $model->scenario = 'update';
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -108,7 +122,7 @@ class ContactController extends Controller
     }
 
     /**
-     * Deletes an existing Contact model.
+     * Deletes an existing Category model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -122,15 +136,15 @@ class ContactController extends Controller
     }
 
     /**
-     * Finds the Contact model based on its primary key value.
+     * Finds the Category model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Contact the loaded model
+     * @return Category the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Contact::findOne($id)) !== null) {
+        if (($model = Category::findOne($id)) !== null) {
             return $model;
         }
 
