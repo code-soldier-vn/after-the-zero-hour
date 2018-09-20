@@ -16,7 +16,14 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'parent')->textInput() ?>
+    <?php
+
+    $flatList = \backend\models\Category::getFlatList($model);
+    $flatList[0] = Yii::t('app', '-- Select parent --');
+    ksort($flatList);
+
+    echo $form->field($model, 'parent')->dropDownList($flatList);
+    ?>
 
     <?= $form->field($model, 'status')->textInput() ?>
 

@@ -18,16 +18,24 @@ $this->params['breadcrumbs'][] = $this->title;
     </p>
 
     <?= GridView::widget([
+        'showFooter' => false,
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
             'id',
             'slug',
             'name',
-            'parent',
+            [
+                'attribute' => 'parent',
+                'content' => function ($model, $id) {
+                    $flatList = \backend\models\Category::getFlatList();
+                    return isset($flatList[$model->parent]) ? $flatList[$model->parent] : '';
+                }
+            ],
             'status',
+            'level',
             DateTimeColumn::get('created_at'),
+            DateTimeColumn::get('updated_at'),
             ActionColumn::get()
         ],
     ]); ?>

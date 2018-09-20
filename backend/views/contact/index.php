@@ -52,6 +52,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     ],
                     'body:ntext',
                     DateTimeColumn::get('created_at'),
+                    DateTimeColumn::get('updated_at'),
                     ActionColumn::get()
                 ]
             ]); ?>

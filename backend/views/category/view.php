@@ -28,8 +28,15 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'slug',
             'name',
-            'parent',
+            [
+                'attribute' => 'parent',
+                'value' => function ($model) {
+                    $flatList = \backend\models\Category::getFlatList();
+                    return isset($flatList[$model->parent]) ? $flatList[$model->parent] : '';
+                }
+            ],
             'status',
+            'level',
             'created_at',
             'updated_at',
         ],

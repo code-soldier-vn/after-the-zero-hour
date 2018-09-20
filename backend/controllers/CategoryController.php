@@ -40,8 +40,14 @@ class CategoryController extends Controller
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['index', 'view', 'create', 'update', 'delete'],
-                        'roles' => ['admin'],
+                        'roles' => ['@'],
+                        'matchCallback' => function ($rule, $action) {
+                            $controller = \Yii::$app->controller->id;
+                            $action = \Yii::$app->controller->action->id;
+                            $permission = sprintf('%s-%s', $controller, $action);
+
+                            return \Yii::$app->user->can($permission);
+                        }
                     ],
                 ],
             ],
@@ -57,6 +63,7 @@ class CategoryController extends Controller
     /**
      * Lists all Category models.
      * @return mixed
+     * @throws NotFoundHttpException
      */
     public function actionIndex()
     {
@@ -65,7 +72,7 @@ class CategoryController extends Controller
 
         return $this->render('index', [
             'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
+            'dataProvider' => $dataProvider
         ]);
     }
 
