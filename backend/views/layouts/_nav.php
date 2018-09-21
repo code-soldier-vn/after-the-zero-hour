@@ -4,6 +4,7 @@
 /* @var $content string */
 
 use yii\helpers\Html;
+
 ?>
 
 <nav class="navbar navbar-default">
@@ -21,17 +22,15 @@ use yii\helpers\Html;
             <ul class="nav navbar-nav navbar-right">
                 <?php if (!\Yii::$app->user->isGuest) : ?>
                     <li>
-                        <p>
-                            <?php
-                            $item = Html::beginForm(['/site/logout'], 'post')
-                                . Html::submitButton(
-                                    'Logout (' . Yii::$app->user->identity->username . ')',
-                                    ['class' => 'btn btn-success btn-fill logout']
-                                )
-                                . Html::endForm();
-                            echo $item;
-                            ?>
-                        </p>
+                        <?php
+                        $item = Html::beginForm(['/site/logout'], 'post')
+                            . Html::submitButton(
+                                'Logout (' . Yii::$app->user->identity->username . ')',
+                                ['class' => 'btn btn-success btn-fill logout']
+                            )
+                            . Html::endForm();
+                        echo $item;
+                        ?>
                     </li>
 
                 <?php endif; ?>

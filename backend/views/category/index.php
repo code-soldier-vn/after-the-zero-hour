@@ -13,10 +13,6 @@ $this->title = Yii::t('app', 'Categories');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="category-index">
-    <p>
-        <?= Html::a(Yii::t('app', 'Create Category'), ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
-
     <?= GridView::widget([
         'showFooter' => false,
         'dataProvider' => $dataProvider,
@@ -39,4 +35,9 @@ $this->params['breadcrumbs'][] = $this->title;
             ActionColumn::get()
         ],
     ]); ?>
+</div>
+<div class="footer">
+    <div class="stats">
+        <i class="ti-new-window"></i> <?= Html::a(Yii::t('app', 'Create Category'), ['create'], ['class' => '']) ?>
+    </div>
 </div>

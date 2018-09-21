@@ -33,6 +33,6 @@ class m180919_032150_init_table_contact extends Migration
      */
     public function safeDown()
     {
-        $this->dropTable('contact');
+        $this->dropTable('{{%contact}}');
     }
 }

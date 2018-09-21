@@ -3,25 +3,19 @@
 namespace backend\controllers;
 
 use Yii;
-use \backend\models\Contact;
-use \backend\models\ContactSearch;
-use \yii\filters\AccessControl;
-use \yii\web\Controller;
-use \yii\web\NotFoundHttpException;
-use \yii\filters\VerbFilter;
+use backend\models\Post;
+use backend\models\PostSearch;
+use yii\web\Controller;
+use yii\web\NotFoundHttpException;
+use yii\filters\VerbFilter;
 use \yii\base\Module;
 
 /**
- * ContactController implements the CRUD actions for Contact model.
+ * PostController implements the CRUD actions for Post model.
  */
-class ContactController extends Controller
+class PostController extends Controller
 {
-    /**
-     * CategoryController constructor.
-     * @param $id
-     * @param \yii\base\Module $module
-     * @param array $config
-     */
+
     public function __construct($id, Module $module, array $config = [])
     {
         parent::__construct($id, $module, $config);
@@ -35,38 +29,22 @@ class ContactController extends Controller
     public function behaviors()
     {
         return [
-            'access' => [
-                'class' => AccessControl::className(),
-                'rules' => [
-                    [
-                        'allow' => true,
-                        'roles' => ['@'],
-                        'matchCallback' => function ($rule, $action) {
-                            $controller = \Yii::$app->controller->id;
-                            $action = \Yii::$app->controller->action->id;
-                            $permission = sprintf('%s-%s', $controller, $action);
-
-                            return \Yii::$app->user->can($permission);
-                        }
-                    ],
-                ],
-            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['POST'],
                 ],
-            ]
+            ],
         ];
     }
 
     /**
-     * Lists all Contact models.
+     * Lists all Post models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new ContactSearch();
+        $searchModel = new PostSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -76,7 +54,7 @@ class ContactController extends Controller
     }
 
     /**
-     * Displays a single Contact model.
+     * Displays a single Post model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -89,13 +67,13 @@ class ContactController extends Controller
     }
 
     /**
-     * Creates a new Contact model.
+     * Creates a new Post model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Contact();
+        $model = new Post();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -107,7 +85,7 @@ class ContactController extends Controller
     }
 
     /**
-     * Updates an existing Contact model.
+     * Updates an existing Post model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -127,7 +105,7 @@ class ContactController extends Controller
     }
 
     /**
-     * Deletes an existing Contact model.
+     * Deletes an existing Post model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -141,15 +119,15 @@ class ContactController extends Controller
     }
 
     /**
-     * Finds the Contact model based on its primary key value.
+     * Finds the Post model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Contact the loaded model
+     * @return Post the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Contact::findOne($id)) !== null) {
+        if (($model = Post::findOne($id)) !== null) {
             return $model;
         }
 

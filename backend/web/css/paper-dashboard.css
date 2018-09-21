@@ -1354,8 +1354,8 @@ textarea.form-control {
 
 .table > thead > tr > th {
     border-bottom-width: 0;
-    font-size: 1.25em;
-    font-weight: 300;
+    /*font-size: 1.25em;*/
+    /*font-weight: 300;*/
 }
 
 .table .radio,
@@ -3753,4 +3753,8 @@ body#login_page {
 body#login_page .wrapper{
     height: auto !important;
     min-height: auto !important;
+}
+
+.grid-view .summary{
+    margin-bottom: 10px;
 }

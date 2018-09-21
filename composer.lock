@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "23e4278ed72f2751079e34718e6f42b6",
+    "content-hash": "a1c6849f656ef14a33f1f6d03a3de6e0",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -324,6 +324,54 @@
                 "html"
             ],
             "time": "2018-02-23T01:58:20+00:00"
+        },
+        {
+            "name": "jimmiw/php-time-ago",
+            "version": "3.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jimmiw/php-time-ago.git",
+                "reference": "e46d2aabf58248e15b9aaa9831e41e30e8617ad8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jimmiw/php-time-ago/zipball/e46d2aabf58248e15b9aaa9831e41e30e8617ad8",
+                "reference": "e46d2aabf58248e15b9aaa9831e41e30e8617ad8",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.6"
+            },
+            "require-dev": {
+                "phpmd/phpmd": "@stable",
+                "phpunit/phpunit": "^6",
+                "squizlabs/php_codesniffer": "^3.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Westsworld": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jimmi Westerberg",
+                    "homepage": "http://www.westsworld.dk",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Simple module, that displays the date in a \"time ago\" format",
+            "homepage": "https://github.com/jimmiw/php-time-ago",
+            "keywords": [
+                "distance of time",
+                "time ago",
+                "time ago in words"
+            ],
+            "time": "2018-08-30T13:21:35+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",

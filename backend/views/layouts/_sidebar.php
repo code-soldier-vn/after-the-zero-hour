@@ -45,6 +45,12 @@ use yii\helpers\Html;
                     <p><?= \Yii::t('app', 'Category'); ?></p>
                 </a>
             </li>
+            <li>
+                <a href="/post/index">
+                    <i class="ti-ink-pen"></i>
+                    <p><?= \Yii::t('app', 'Post'); ?></p>
+                </a>
+            </li>
         </ul>
     </div>
 </div>

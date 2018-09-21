@@ -13,52 +13,44 @@ $this->title = Yii::t('app', 'Contacts');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
-<div class="card">
-    <div class="header clearfix">
-        <h4 class="title"><?= Html::encode($this->title) ?></h4>
-    </div>
-    <div class="content table-responsive">
-        <div class="contact-index">
-
-            <?= Html::a(Yii::t('app', 'Create Contact'), ['create'], ['class' => 'btn btn-success']) ?>
-
-            <?= GridView::widget([
-                'dataProvider' => $dataProvider,
-                'filterModel' => $searchModel,
-                'columns' => [
-                    [
-                        'attribute' => 'id',
-                        'headerOptions' => [
-                            'style' => 'width: 40px;'
-                        ]
-                    ],
-                    [
-                        'attribute' => 'name',
-                        'headerOptions' => [
-                            'style' => 'width: 10%;'
-                        ]
-                    ],
-                    [
-                        'attribute' => 'email',
-                        'headerOptions' => [
-                            'style' => 'width: 10%;'
-                        ]
-                    ],
-                    [
-                        'attribute' => 'subject',
-                        'headerOptions' => [
-                            'style' => 'width: 10%;'
-                        ]
-                    ],
-                    'body:ntext',
-                    DateTimeColumn::get('created_at'),
-                    DateTimeColumn::get('updated_at'),
-                    ActionColumn::get()
+<div>
+    <?= GridView::widget([
+        'dataProvider' => $dataProvider,
+        'filterModel' => $searchModel,
+        'columns' => [
+            [
+                'attribute' => 'id',
+                'headerOptions' => [
+                    'style' => 'width: 40px;'
                 ]
-            ]); ?>
-        </div>
+            ],
+            [
+                'attribute' => 'name',
+                'headerOptions' => [
+                    'style' => 'width: 10%;'
+                ]
+            ],
+            [
+                'attribute' => 'email',
+                'headerOptions' => [
+                    'style' => 'width: 10%;'
+                ]
+            ],
+            [
+                'attribute' => 'subject',
+                'headerOptions' => [
+                    'style' => 'width: 10%;'
+                ]
+            ],
+            'body:ntext',
+            DateTimeColumn::get('created_at'),
+            DateTimeColumn::get('updated_at'),
+            ActionColumn::get()
+        ]
+    ]); ?>
+</div>
+<div class="footer">
+    <div class="stats">
+        <i class="ti-new-window"></i> <?= Html::a(Yii::t('app', 'Create Contact'), ['create'], ['class' => '']) ?>
     </div>
 </div>
-
-
-
