@@ -20,7 +20,7 @@ class m180921_024310_init_table_post extends Migration
         $this->createTable("{{%post}}", [
             'id' => $this->primaryKey(),
             'post_author' => $this->integer()->notNull(),
-            'post_slug' => $this->string(255)->notNull(),
+            'post_slug' => $this->string(255)->notNull()->unique(),
             'post_title' => $this->string(255)->notNull(),
             'post_excerpt' => $this->text(),
             'post_content' => $this->text(),

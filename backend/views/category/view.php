@@ -1,7 +1,7 @@
 <?php
 
-use yii\helpers\Html;
-use yii\widgets\DetailView;
+use \yii\helpers\Html;
+use \yii\widgets\DetailView;
 use \backend\components\helpers\data\datetime\TimeAgo;
 
 /* @var $this yii\web\View */

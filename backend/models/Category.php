@@ -137,21 +137,22 @@ class Category extends \yii\db\ActiveRecord
     }
 
     /**
-     * @throws NotFoundHttpException
+     * @param Category|null $category
+     * @return array|null
      */
-    public static function getFlatList(Category $cat = null)
+    public static function getFlatList(Category $category = null)
     {
         if (null === self::$flatList) {
             $model = self::find()
                 ->select(['id', 'name']);
 
-            if ($cat) {
-                $model->where("id <> {$cat->id}")
-                    ->andWhere("parent <> {$cat->id}");
+            if ($category && $category->id) {
+                $model->where("id <> {$category->id}")
+                    ->andWhere("parent <> {$category->id}");
             }
 
-            if ($cat) {
-                $model->andWhere("level < {$cat->level}");
+            if ($category && $category->id) {
+                $model->andWhere("level < {$category->level}");
             }
 
             $model = $model->all();

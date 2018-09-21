@@ -16,9 +16,12 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
+            [
+                'attribute' => 'id',
+                'headerOptions' => [
+                    'style' => 'width: 40px;'
+                ]
+            ],
             'post_author',
             'post_slug',
             'post_title',
@@ -30,13 +33,13 @@ $this->params['breadcrumbs'][] = $this->title;
             //'comment_count',
             //'created_at',
             //'updated_at',
-
-            ['class' => 'yii\grid\ActionColumn'],
+            \backend\components\helpers\grid\columns\DateTimeColumn::get('created_at'),
+            \backend\components\helpers\grid\columns\ActionColumn::get()
         ],
     ]); ?>
 </div>
 <div class="footer">
     <div class="stats">
-        <i class="ti-new-window"></i>  <?= Html::a(Yii::t('app', 'Create Post'), ['create'], ['class' => '']) ?>
+        <i class="ti-new-window"></i> <?= Html::a(Yii::t('app', 'Create Post'), ['create'], ['class' => '']) ?>
     </div>
 </div>
