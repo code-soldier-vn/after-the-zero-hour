@@ -3,6 +3,7 @@
 namespace frontend\controllers;
 
 use backend\models\Post;
+use yii\data\Pagination;
 
 class PostController extends \yii\web\Controller
 {
@@ -13,16 +14,25 @@ class PostController extends \yii\web\Controller
 
     public function actionIndex()
     {
-        $model = Post::find()
-            ->select('post.*')
+
+        $query = Post::find();
+        $countQuery = clone $query;
+        $pages = new Pagination([
+            'totalCount' => $countQuery->count()
+        ]);
+
+        $models = $query->offset($pages->offset)
+            ->limit($pages->limit)
             ->all();
 
-        return $this->render('index', ['model' => $model]);
+        return $this->render('index', [
+            'models' => $models,
+            'pages' => $pages
+        ]);
     }
 
     public function actionView()
     {
         return $this->render('view');
     }
-
 }
