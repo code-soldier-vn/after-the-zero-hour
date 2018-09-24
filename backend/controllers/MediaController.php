@@ -8,6 +8,7 @@ use backend\models\MediaSearch;
 use yii\helpers\FileHelper;
 use yii\web\NotFoundHttpException;
 use yii\web\UploadedFile;
+use Gumlet\ImageResize;
 
 /**
  * MediaController implements the CRUD actions for Media model.
@@ -58,11 +59,18 @@ class MediaController extends CoreControllerAbstract
                 try {
                     $dir = Yii::getAlias('@backend/web/uploads/') . date('Y/m/d/');
                     $path = $dir . $model->path->getBaseName() . date('_YmdHis') . '.' . $model->path->getExtension();
+                    $thumbPath = $dir . $model->path->getBaseName() . date('_YmdHis') . '_thumb.' . $model->path->getExtension();
+
                     FileHelper::createDirectory($dir);
                     $isUploaded = $model->path->saveAs($path);
 
                     if ($isUploaded) {
                         $model->path = str_replace(Yii::getAlias('@backend/web/uploads/'), '/uploads/', $path);
+
+                        $image = new ImageResize($path);
+                        $image->resize(60, 60);
+                        $image->save($thumbPath);
+
                         $model->save();
                     }
                 } catch (\Exception $e) {

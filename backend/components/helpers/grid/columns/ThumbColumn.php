@@ -9,7 +9,7 @@ class ThumbColumn implements ColumInterface
         return [
             'attribute' => $col,
             'content' => function (\yii\db\ActiveRecord $model) {
-                return sprintf('<img src="%s" alt="%s">', $model->path, $model->title);
+                return sprintf('<img src="%s" alt="%s">', str_replace(['.jpg', '.png'], ['_thumb.jpg', '_thumb.png'], $model->path), $model->title);
             },
             'headerOptions' => [
                 'style' => 'width: 60px'
