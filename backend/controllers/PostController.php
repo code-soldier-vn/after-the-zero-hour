@@ -5,53 +5,13 @@ namespace backend\controllers;
 use Yii;
 use backend\models\Post;
 use backend\models\PostSearch;
-use yii\filters\AccessControl;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
-use \yii\base\Module;
 
 /**
  * PostController implements the CRUD actions for Post model.
  */
-class PostController extends Controller
+class PostController extends CoreControllerAbstract
 {
-
-    public function __construct($id, Module $module, array $config = [])
-    {
-        parent::__construct($id, $module, $config);
-        $this->layout = 'crud';
-    }
-
-
-    public function behaviors()
-    {
-        return [
-            'access' => [
-                'class' => AccessControl::className(),
-                'rules' => [
-                    [
-                        'allow' => true,
-                        'roles' => ['@'],
-                        'matchCallback' => function ($rule, $action) {
-                            $controller = \Yii::$app->controller->id;
-                            $action = \Yii::$app->controller->action->id;
-                            $permission = sprintf('%s-%s', $controller, $action);
-
-                            return \Yii::$app->user->can($permission);
-                        }
-                    ],
-                ],
-            ],
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
-                ],
-            ],
-        ];
-    }
-
     /**
      * Lists all Post models.
      * @return mixed

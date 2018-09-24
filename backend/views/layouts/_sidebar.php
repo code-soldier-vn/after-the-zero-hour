@@ -26,31 +26,7 @@ use yii\helpers\Html;
         }
         ?>
 
-        <ul class="nav">
-            <li>
-                <a href="<?= Yii::$app->homeUrl; ?>">
-                    <i class="ti-panel"></i>
-                    <p><?= \Yii::t('app', 'Dashboard'); ?></p>
-                </a>
-            </li>
-            <li>
-                <a href="/contact/index">
-                    <i class="ti-email"></i>
-                    <p><?= \Yii::t('app', 'Contact'); ?></p>
-                </a>
-            </li>
-            <li>
-                <a href="/category/index">
-                    <i class="ti-archive"></i>
-                    <p><?= \Yii::t('app', 'Category'); ?></p>
-                </a>
-            </li>
-            <li>
-                <a href="/post/index">
-                    <i class="ti-ink-pen"></i>
-                    <p><?= \Yii::t('app', 'Post'); ?></p>
-                </a>
-            </li>
-        </ul>
+        <?= \backend\components\widgets\AdminMenuWidget::widget() ?>
+
     </div>
 </div>

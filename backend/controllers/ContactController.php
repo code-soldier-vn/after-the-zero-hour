@@ -5,61 +5,13 @@ namespace backend\controllers;
 use Yii;
 use \backend\models\Contact;
 use \backend\models\ContactSearch;
-use \yii\filters\AccessControl;
-use \yii\web\Controller;
 use \yii\web\NotFoundHttpException;
-use \yii\filters\VerbFilter;
-use \yii\base\Module;
 
 /**
  * ContactController implements the CRUD actions for Contact model.
  */
-class ContactController extends Controller
+class ContactController extends CoreControllerAbstract
 {
-    /**
-     * CategoryController constructor.
-     * @param $id
-     * @param \yii\base\Module $module
-     * @param array $config
-     */
-    public function __construct($id, Module $module, array $config = [])
-    {
-        parent::__construct($id, $module, $config);
-        $this->layout = 'crud';
-    }
-
-
-    /**
-     * {@inheritdoc}
-     */
-    public function behaviors()
-    {
-        return [
-            'access' => [
-                'class' => AccessControl::className(),
-                'rules' => [
-                    [
-                        'allow' => true,
-                        'roles' => ['@'],
-                        'matchCallback' => function ($rule, $action) {
-                            $controller = \Yii::$app->controller->id;
-                            $action = \Yii::$app->controller->action->id;
-                            $permission = sprintf('%s-%s', $controller, $action);
-
-                            return \Yii::$app->user->can($permission);
-                        }
-                    ],
-                ],
-            ],
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
-                ],
-            ]
-        ];
-    }
-
     /**
      * Lists all Contact models.
      * @return mixed
