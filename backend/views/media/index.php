@@ -22,7 +22,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 ]
             ],
             'title',
-            'path:ntext',
+            \backend\components\helpers\grid\columns\ThumbColumn::get(),
             'created_by',
             //'status',
             //'del_flag',
