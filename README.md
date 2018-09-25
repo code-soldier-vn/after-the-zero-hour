@@ -1,1 +1,1 @@
-# after-the-zero-hour
+# yii2-self-learning
