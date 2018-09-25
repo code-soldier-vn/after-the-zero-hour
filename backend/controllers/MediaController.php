@@ -2,6 +2,8 @@
 
 namespace backend\controllers;
 
+use backend\components\helpers\file\Path;
+use backend\models\MediaThumbs;
 use Yii;
 use backend\models\Media;
 use backend\models\MediaSearch;
@@ -53,30 +55,7 @@ class MediaController extends CoreControllerAbstract
         $model = new Media();
 
         if ($model->load(Yii::$app->request->post())) {
-
-            $model->path = UploadedFile::getInstance($model, 'path');
-            if ($model->path && $model->validate()) {
-                try {
-                    $dir = Yii::getAlias('@backend/web/uploads/') . date('Y/m/d/');
-                    $path = $dir . $model->path->getBaseName() . date('_YmdHis') . '.' . $model->path->getExtension();
-                    $thumbPath = $dir . $model->path->getBaseName() . date('_YmdHis') . '_thumb.' . $model->path->getExtension();
-
-                    FileHelper::createDirectory($dir);
-                    $isUploaded = $model->path->saveAs($path);
-
-                    if ($isUploaded) {
-                        $model->path = str_replace(Yii::getAlias('@backend/web/uploads/'), '/uploads/', $path);
-
-                        $image = new ImageResize($path);
-                        $image->resize(60, 60);
-                        $image->save($thumbPath);
-
-                        $model->save();
-                    }
-                } catch (\Exception $e) {
-                    \Yii::$app->getSession()->setFlash('error', $e->getMessage());
-                }
-            }
+            $model = $model->saveAndUpload();
 
             return $this->redirect(['view', 'id' => $model->id]);
         }
@@ -115,7 +94,14 @@ class MediaController extends CoreControllerAbstract
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $model = $this->findModel($id);
+
+        if ($model->delete()) {
+            $path = Path::toAbsUrl($model->path);
+            if (file_exists($path)) {
+                unlink($path);
+            }
+        }
 
         return $this->redirect(['index']);
     }

@@ -24,7 +24,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'title',
             \backend\components\helpers\grid\columns\ThumbColumn::get('path'),
             'created_by',
-            //'status',
+            'status',
             //'del_flag',
             \backend\components\helpers\grid\columns\DateTimeColumn::get('created_at'),
             \backend\components\helpers\grid\columns\DateTimeColumn::get('updated_at'),

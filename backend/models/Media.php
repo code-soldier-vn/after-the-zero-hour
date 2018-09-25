@@ -2,12 +2,16 @@
 
 namespace backend\models;
 
-use Yii;
-use yii\behaviors\AttributeBehavior;
-use yii\behaviors\TimestampBehavior;
-use yii\db\ActiveRecord;
-use yii\db\Expression;
-use yii\web\UploadedFile;
+use \backend\components\assets\ImageResize as AssetsImageResize;
+use \backend\components\helpers\file\Path;
+use \Yii;
+use \yii\behaviors\AttributeBehavior;
+use \yii\behaviors\TimestampBehavior;
+use \yii\db\ActiveRecord;
+use \yii\db\Expression;
+use \yii\helpers\FileHelper;
+use \yii\web\UploadedFile;
+use \Gumlet\ImageResize;
 
 /**
  * This is the model class for table "media".
@@ -40,7 +44,7 @@ class Media extends \yii\db\ActiveRecord
             [['title'], 'required'],
             [['status'], 'integer'],
             [['title'], 'string', 'max' => 255],
-            [['path'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg', 'mimeTypes' => 'image/jpeg, image/png']
+            [['path'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg, jpeg', 'mimeTypes' => 'image/jpeg, image/png']
         ];
     }
 
@@ -83,5 +87,60 @@ class Media extends \yii\db\ActiveRecord
                 }
             ]
         ];
+    }
+
+    public function saveAndUpload()
+    {
+        $this->path = UploadedFile::getInstance($this, 'path');
+
+        if ($this->path && $this->validate()) {
+            try {
+                $filePath = new Path();
+
+                $fileName = Path::generateUniqueFileName($this->path->getBaseName(), $this->path->getExtension());
+
+                $dir = $filePath->getUploadSubDir();
+                $dirThumb = $filePath->getUploadThumbDir();
+
+                $path = $dir . $fileName;
+                $pathThumb = $dirThumb . $fileName;
+
+                FileHelper::createDirectory($dir);
+                FileHelper::createDirectory($dirThumb);
+
+                $isUploaded = $this->path->saveAs($path);
+
+                if ($isUploaded) {
+                    $this->path = Path::toShortUrl($path);
+
+                    $image = new ImageResize($path);
+                    $thumb = \Yii::$app->imageResize->getThumb();
+                    $image->crop(60, 60);
+                    $image->save($pathThumb);
+
+                    if ($this->save()) {
+                        $thisThumbs = new MediaThumbs();
+
+                        $thisThumbs->media_id = $this->id;
+                        $thisThumbs->path = Path::toShortUrl($pathThumb);
+                        $thisThumbs->save();
+                    }
+                }
+            } catch (\Exception $e) {
+                \Yii::$app->getSession()->setFlash('error', $e->getMessage());
+            }
+        }
+
+        return $this;
+    }
+
+    public function getThumbs()
+    {
+        return $this->hasMany(MediaThumbs::className(), ['media_id' => 'id']);
+    }
+
+    public function getThumb()
+    {
+        return $this->hasOne(MediaThumbs::className(), ['media_id' => 'id'])->where(['size' => 'thumb']);
     }
 }
